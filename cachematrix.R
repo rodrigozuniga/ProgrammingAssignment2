@@ -1,6 +1,6 @@
 ## Put comments here that give an overall description of what your
 ## functions do
-
+## function to inverse matrix but also checks cache for previous matrix inversion
 ## Write a short comment describing this function
 
 makeCacheMatrix <- function(x = matrix()) {
