@@ -17,7 +17,3 @@ cacheSolve <- function(x, ...) {
         ix
 }
 
-x<-matrix(c(1,1,0,1),nrow=2)
-x
-solve(x)
-cacheSolve(x)
