@@ -1,19 +1,41 @@
-## Put comments here that give an overall description of what your
-## functions do
-## Function to inverse matrix but also checks cache for previous matrix inversion
-## CacheSolve returns the inverse of a function 
-
+####################################################################
+## makeCacheMatrix function creates a list with a null matrix 
+##  and internal functions to set and get a given matrix as well as 
+##  set and get the the inverse of that matrix 
+####################################################################
 
 makeCacheMatrix <- function(x = matrix()) {
-
+        inv <-matrix()
+        set <-function(y){
+                x<<-y
+                inv <-matrix()
+        }
+        get <- function() x
+        setinv <- function(inverse) {inv <<- inverse}
+        getinv <- function() inv
+        
+        list(set = set, 
+             get = get,
+             setinv=setinv,
+             getinv=getinv)
 }
 
-
-## Write a short comment describing this function
+#####################################################################
+## CacheSolve takes a list created by makeCacheMatrix and checks 
+## if the inverse of the matrix already exists in the list. If the 
+## inverse already exists then it returns that matrix with a message. 
+## If the inverse does not exist then it calculates the inverse 
+## of the matrix using the solve function and returns it 
+#####################################################################
 
 cacheSolve <- function(x, ...) {
-        ix<-solve(x)
-        ## Return a matrix that is the inverse of 'x'
-        ix
+        inv <- x$getinv()
+        if(!all(is.na(inv))) {
+                message("getting inverse from cache")
+                return(inv)
+        }
+        mtrx <- x$get()
+        inv <- solve(mtrx, ...)
+        x$setinv(inv)
+        inv
 }
-
